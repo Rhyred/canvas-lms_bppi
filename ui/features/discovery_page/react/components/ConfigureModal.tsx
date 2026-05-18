@@ -21,7 +21,7 @@ import {Button, CloseButton} from '@instructure/ui-buttons'
 import {Modal} from '@instructure/ui-modal'
 import {Heading} from '@instructure/ui-heading'
 import {Alert} from '@instructure/ui-alerts'
-import {showFlashAlert} from '@instructure/platform-alerts'
+// import {showFlashAlert} from '@instructure/platform-alerts'
 import {FetchApiError} from '@canvas/do-fetch-api-effect'
 import {useScope as createI18nScope} from '@canvas/i18n'
 import {fetchDiscoveryConfig, saveDiscoveryConfig, toApiConfig, toCardConfig} from '../api'
@@ -163,7 +163,7 @@ export function ConfigureModal({open, onClose}: ConfigureModalProps) {
             .join(', ') || fallback
       }
 
-      showFlashAlert({message, type: 'error'})
+      console.error(message)
     } finally {
       setIsSaving(false)
     }
