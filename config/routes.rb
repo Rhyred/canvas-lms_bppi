@@ -37,6 +37,7 @@ CanvasRails::Application.routes.draw do
   get "graphiql", to: "graphql#graphiql"
 
   get "acceptable_use_policy", to: "accounts#acceptable_use_policy"
+  get "home-page", to: "home_page#index"
 
   resources :submissions, only: [] do
     resources :submission_comments, path: :comments, only: :index, defaults: { format: :pdf }
@@ -83,6 +84,7 @@ CanvasRails::Application.routes.draw do
 
   get "mr/:id" => "info#message_redirect", :as => :message_redirect
   get "help_links" => "info#help_links"
+  get "ada_chat_popup" => "ada_chat_popup#show"
 
   # This is a debug route that makes working on error pages easier
   get "test_error" => "info#test_error" unless Rails.env.production?
@@ -591,10 +593,10 @@ CanvasRails::Application.routes.draw do
 
     resources :accessibility_issues, only: [:update]
 
-    resources :ai_experiences, only: %i[index create new show edit update destroy] do
-      get "ai_conversations", to: "ai_conversations#index", as: :ai_conversations
-    end
+    resources :ai_experiences, only: %i[index create new show edit update destroy]
     resources :ai_experiences, only: %i[index show new edit]
+
+    get "notebook" => "notebook#index", :as => :notebook
   end
 
   get "quiz_statistics/:quiz_statistics_id/files/:file_id/download" => "files#show", :as => :quiz_statistics_download, :download => "1"
@@ -1301,6 +1303,10 @@ CanvasRails::Application.routes.draw do
       get "courses/:course_id/ai_experiences/:id/ai_conversations/:conversation_id", action: :ai_conversation_show, as: "course_ai_experience_ai_conversation"
     end
 
+    scope(controller: :study_assist) do
+      post "courses/:course_id/study_assist", action: :create, as: "course_study_assist"
+    end
+
     scope(controller: :ai_conversations) do
       get "courses/:course_id/ai_experiences/:ai_experience_id/conversations", action: :active_conversation, as: "course_ai_experience_conversations"
       get "courses/:course_id/ai_experiences/:ai_experience_id/conversations/:id", action: :show, as: "course_ai_experience_conversation"
@@ -1938,6 +1944,19 @@ CanvasRails::Application.routes.draw do
       get "accounts/:account_id/accessibility_issue_summary", action: :accessibility_issue_summary, as: "account_accessibility_issue_summary"
     end
 
+    scope(controller: :accessibility_course_statistics) do
+      # This endpoint was created during experimentation phase for Educator Dashboard
+      # At this time the endpoint only pulls courses that the user is enrolled as an educator
+      # i.e. TeacherEnrollment or DesignerEnrollment
+      # This this feature goes to GA, it will be idea to update the endpoint to remove educator
+      # as the indicator.
+      get "users/:user_id/educator_accessibility_course_statistics", action: :index, as: "user_educator_accessibility_course_statistics"
+    end
+
+    scope(controller: :accessibility_course_scans) do
+      post "users/:user_id/educator_accessibility_course_scan", action: :create, as: "user_educator_accessibility_course_scan"
+    end
+
     scope(controller: :sub_accounts) do
       post "accounts/:account_id/sub_accounts", action: :create
       delete "accounts/:account_id/sub_accounts/:id", action: :destroy
@@ -2165,6 +2184,7 @@ CanvasRails::Application.routes.draw do
       put "accounts/:account_id/lti_registrations/:id", action: :update
       put "accounts/:account_id/lti_registrations/:id/reset", action: :reset
       post "accounts/:account_id/lti_registrations/:id/bind", action: :bind
+      delete "accounts/:account_id/lti_registrations/:id/bind", action: :unbind
       post "accounts/:account_id/lti_registrations/:id/install_from_template", action: :install_from_template
     end
 
@@ -3008,10 +3028,6 @@ CanvasRails::Application.routes.draw do
       get "plugins/:id", action: :show
     end
 
-    scope(controller: :rich_content_api) do
-      post "rich_content/generate", action: :generate
-    end
-
     scope(controller: :block_editor_templates_api) do
       get "courses/:course_id/block_editor_templates", action: :index
       post "courses/:course_id/block_editor_templates", action: :create
@@ -3255,7 +3271,6 @@ CanvasRails::Application.routes.draw do
       get "/accounts/:account_id/data_services/:id", action: :show, as: :data_services_show
       put "/accounts/:account_id/data_services/:id", action: :update, as: :data_services_update
       get "/accounts/:account_id/data_services", action: :index, as: :data_services_index
-      get "/accounts/:account_id/event_types", action: :event_types_index, as: :data_services_event_types
       delete "/accounts/:account_id/data_services/:id", action: :destroy, as: :data_services_destroy
     end
 

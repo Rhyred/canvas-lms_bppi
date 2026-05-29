@@ -1,0 +1,153 @@
+.homePage {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* 1. Top Header Bar */
+.topHeader {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.5rem 2rem;
+}
+
+/* 2. Main Navigation Navbar */
+.navbar {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbarBrand {
+  color: #4CAF50;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.navbarBrand span {
+  color: #FF9800;
+}
+
+.navLink {
+  color: #64748b;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: #FF9800;
+}
+
+.loginButton {
+  background-color: #FF9800;
+  border-radius: 4px;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.loginButton:hover {
+  background-color: #f57c00;
+}
+
+/* 3. Hero Banner */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1523050853064-841f3e792c30?auto=format&fit=crop&q=80&w=1200');
+  background-position: center;
+  background-size: cover;
+  color: white;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 4. Content Grid */
+.mainLayout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 2fr 1fr;
+  margin: 3rem auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.sectionTitle {
+  border-left: 4px solid #FF9800;
+  color: #334155;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+}
+
+/* 5. Sidebar Widget */
+.widget {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+.widgetTitle {
+  color: #475569;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* 6. Footer */
+.footer {
+  background-color: #1e293b;
+  color: #94a3b8;
+  padding: 4rem 2rem;
+}
+
+.footerGrid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerTitle {
+  color: white;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
