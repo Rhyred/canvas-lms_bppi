@@ -5,17 +5,17 @@
       {
         "variable_name": "ic-brand-primary",
         "type": "color",
-        "default": "#2B7ABC"
+        "default": "#2563eb"
       },
       {
         "variable_name": "ic-brand-font-color-dark",
         "type": "color",
-        "default": "#273540"
+        "default": "#1e293b"
       },
       {
         "variable_name": "ic-link-color",
         "type": "color",
-        "default": "#0E68B3"
+        "default": "#2563eb"
       },
       {
         "variable_name": "ic-brand-button--primary-bgd",
@@ -45,7 +45,7 @@
       {
         "variable_name": "ic-brand-global-nav-bgd",
         "type": "color",
-        "default": "#334451"
+        "default": "#0f172a"
       },
       {
         "variable_name": "ic-brand-global-nav-ic-icon-svg-fill",
@@ -95,7 +95,7 @@
       {
         "variable_name": "ic-brand-global-nav-logo-bgd",
         "type": "color",
-        "default": "#334451"
+        "default": "#0f172a"
       },
       {
         "variable_name": "ic-brand-header-image",
@@ -168,7 +168,7 @@
       {
         "variable_name": "ic-brand-Login-body-bgd-color",
         "type": "color",
-        "default": "#334451"
+        "default": "#0f172a"
       },
       {
         "variable_name": "ic-brand-Login-body-bgd-image",
@@ -179,7 +179,7 @@
       {
         "variable_name": "ic-brand-Login-body-bgd-shadow-color",
         "type": "color",
-        "default": "#273540"
+        "default": "#1e293b"
       },
       {
         "variable_name": "ic-brand-Login-logo",
@@ -275,3 +275,4 @@
     ]
   }
 ]
+

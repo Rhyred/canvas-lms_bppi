@@ -1,22 +1,33 @@
+/* =========================================
+   TEMA BPPI MODERN (NAVY & BIRU ELEGAN)
+   ========================================= */
+
 .homePage {
-  background-color: #f8fafc;
+  background-color: #f4f6f8; /* Latar belakang abu kebiruan super halus */
   color: #1e293b;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
 }
 
-/* 1. Top Header Bar */
+/* 1. Top Header Bar (Baris paling atas) */
 .topHeader {
-  background-color: #4CAF50;
-  color: white;
-  font-size: 0.875rem;
+  background-color: #0b1120; /* Navy sangat gelap */
+  color: #cbd5e1 !important;
+  font-size: 0.85rem;
   padding: 0.5rem 2rem;
+}
+.topHeader span {
+  color: #cbd5e1 !important; 
+}
+.topHeader a {
+  color: #60a5fa !important; 
+  text-decoration: none !important;
 }
 
 /* 2. Main Navigation Navbar */
 .navbar {
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
@@ -24,71 +35,86 @@
 }
 
 .navbarBrand {
-  color: #4CAF50;
+  color: #0f172a !important; /* Warna teks BPPI */
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
+  text-decoration: none !important;
 }
 
 .navbarBrand span {
-  color: #FF9800;
+  color: #3b82f6 !important; /* Warna teks LMS jadi Biru */
 }
 
 .navLink {
-  color: #64748b;
+  color: #475569 !important;
   font-weight: 500;
   padding: 0.5rem 1rem;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: color 0.2s;
 }
 
 .navLink:hover {
-  color: #FF9800;
+  color: #2563eb !important;
 }
 
-.loginButton {
-  background-color: #FF9800;
-  border-radius: 4px;
-  color: white;
-  font-weight: 600;
-  padding: 0.6rem 1.25rem;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-
-.loginButton:hover {
-  background-color: #f57c00;
-}
-
-/* 3. Hero Banner */
+/* 3. Hero Banner (Kotak banner ngambang di tengah) */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1523050853064-841f3e792c30?auto=format&fit=crop&q=80&w=1200');
+  /* Gradasi hitam ke transparan dicampur gambar */
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1200');
   background-position: center;
   background-size: cover;
-  color: white;
-  padding: 6rem 2rem;
-  text-align: center;
+  color: #ffffff !important;
+  padding: 5rem 3rem;
+  text-align: left; /* Teks rata kiri biar modern */
+  
+  /* Bikin banner ngambang */
+  max-width: 1200px;
+  margin: 2rem auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
 }
 
 .heroTitle {
-  font-size: 3.5rem;
+  font-size: 2.75rem;
   font-weight: 800;
   margin-bottom: 1rem;
+  color: #ffffff !important;
 }
 
 .heroSubtitle {
-  font-size: 1.25rem;
-  margin-bottom: 2.5rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  color: #e2e8f0 !important;
+  line-height: 1.6;
 }
 
-/* 4. Content Grid */
+/* Tombol (Login to LMS & Mulai Belajar) */
+.hero a, .hero button, .loginButton {
+  background-color: #3b82f6 !important; /* Biru terang BPPI */
+  color: #ffffff !important; /* Paksa teks putih */
+  border-radius: 8px !important;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  display: inline-block;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+}
+
+.hero a:hover, .hero button:hover, .loginButton:hover {
+  background-color: #2563eb !important; /* Biru agak gelap saat disorot */
+  color: #ffffff !important;
+  transform: translateY(-2px); /* Efek tombol naik dikit pas disorot */
+}
+
+/* 4. Content Grid (Bawahnya Banner) */
 .mainLayout {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
   grid-template-columns: 2fr 1fr;
-  margin: 3rem auto;
+  margin: 2rem auto;
   max-width: 1200px;
   padding: 0 1rem;
 }
@@ -99,43 +125,31 @@
   }
 }
 
-.section {
+/* 5. Kotak Konten & Sidebar Widget */
+.section, .widget {
   background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  padding: 2rem;
-}
-
-.sectionTitle {
-  border-left: 4px solid #FF9800;
-  color: #334155;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding-left: 1rem;
-}
-
-/* 5. Sidebar Widget */
-.widget {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px; /* Sudut kotak membulat rapi */
   margin-bottom: 1.5rem;
   padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Bayangan halus */
 }
 
-.widgetTitle {
-  color: #475569;
-  font-size: 1.125rem;
+.sectionTitle, .widgetTitle {
+  color: #0f172a !important;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #3b82f6; /* Garis biru di sebelah kiri judul */
+  padding-left: 0.75rem;
 }
 
-/* 6. Footer */
+/* 6. Footer (Biar aman kalau dipanggil) */
 .footer {
-  background-color: #1e293b;
+  background-color: #0f172a;
   color: #94a3b8;
   padding: 4rem 2rem;
+  margin-top: 2rem;
 }
 
 .footerGrid {
