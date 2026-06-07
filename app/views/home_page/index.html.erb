@@ -1,4 +1,4 @@
-<% js_bundle :home_page %>
+<%# js_bundle :home_page %>
 
 <style>
   /* ==========================================================
@@ -63,11 +63,11 @@
     font-weight: 500;
   }
   .bppi-topbar a {
-    color: #60a5fa; /* Blue 400 */
-    text-decoration: none;
+    color: #60a5fa !important; /* Blue 400 */
+    text-decoration: none !important;
     transition: color 0.2s;
   }
-  .bppi-topbar a:hover { color: #93c5fd; }
+  .bppi-topbar a:hover { color: #93c5fd !important; }
   .bppi-topbar-left { display: flex; gap: 20px; flex-wrap: wrap; }
 
   /* --- Header Bersih (Navigasi Kanan) --- */
@@ -76,7 +76,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 5%; /* Padding dikembalikan sedikit lebih lega */
+    padding: 16px 5%;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
@@ -87,37 +87,33 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    /* margin-left: 10px; */ /* Dihapus jika tidak perlu */
   }
 
-  /* PERBAIKAN LOGO: Karena gambar sudah di-crop, kita buang trik Zoom (scale) dan atur tinggi normal */
+  /* PERBAIKAN LOGO */
   .bppi-logo-img {
-    height: 48px; /* <-- UKURAN NORMAL NAVBAR. Bisa Anda naik-turunkan antara 40px - 60px */
+    height: 48px;
     width: auto;
     max-width: 300px;
     object-fit: contain;
-    /* transform: scale(...) DIHAPUS SEPENUHNYA */
   }
   
   .bppi-nav { 
-    display: flex; 
+    display: flex;
     gap: 32px; 
     flex-wrap: wrap; 
     align-items: center; 
   }
   .bppi-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
+    color: var(--text-muted) !important;
+    text-decoration: none !important;
     font-weight: 600;
     font-size: 16px;
     transition: all 0.2s;
-    /* Hilangkan padding ekstra bawaan icon external Canvas */
     padding-right: 0 !important;
     background-image: none !important;
   }
-  .bppi-nav a:hover, .bppi-nav a.active { color: var(--primary); }
+  .bppi-nav a:hover, .bppi-nav a.active { color: var(--primary) !important; }
 
-  /* PERBAIKAN CSS: Menyembunyikan ikon eksternal Canvas tanpa menyembunyikan teks menu */
   .bppi-nav a .ui-icon-extlink,
   .bppi-nav a .icon-external-link,
   .bppi-nav a span[class*="icon-"],
@@ -131,7 +127,7 @@
     content: none !important;
   }
 
-  /* --- Hero Banner dengan Overlay Modern --- */
+  /* --- Hero Banner --- */
   .bppi-hero-wrapper { padding: 24px 5% 0; }
   .bppi-hero {
     background: linear-gradient(to right, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
@@ -151,25 +147,31 @@
     font-weight: 800;
     margin: 0 0 16px 0;
     line-height: 1.2;
+    color: white !important;
   }
   .bppi-hero-text p {
     font-size: 1.1rem;
-    color: #e2e8f0;
+    color: #e2e8f0 !important;
     margin: 0 0 24px 0;
   }
+  
+  /* --- INI TOMBOL YANG DIBENERIN --- */
   .bppi-btn {
-    background-color: var(--primary);
-    color: white;
+    background-color: var(--primary) !important;
+    color: white !important; /* Tameng agar teks tetap putih */
     padding: 12px 24px;
     border-radius: 8px;
-    text-decoration: none;
+    text-decoration: none !important;
     font-weight: 600;
     display: inline-block;
     transition: background 0.2s;
     border: none;
     cursor: pointer;
   }
-  .bppi-btn:hover { background-color: var(--primary-hover); }
+  .bppi-btn:hover { 
+    background-color: var(--primary-hover) !important; 
+    color: white !important;
+  }
 
   /* --- Layout Utama --- */
   .bppi-main-wrapper {
@@ -329,7 +331,6 @@
 <div id="home-page-mount">
   <div class="bppi-el-container">
     
-    <!-- Top Bar -->
     <div class="bppi-topbar">
       <div class="bppi-topbar-left">
         <span>📞 +62 21 1234567 ext 123</span>
@@ -340,23 +341,18 @@
       </div>
     </div>
 
-    <!-- Header -->
     <div class="bppi-header">
       <a href="/" class="bppi-logo">
         <img src="/images/custom_logo/Elearning_BPPI.png" alt="Elearning BPPI Logo" class="bppi-logo-img">
       </a>
       <div class="bppi-nav">
         <a href="/" class="active">Beranda</a>
-        <!-- Link menuju portal resmi sekolah -->
         <a href="https://sekolahbppi.sch.id/" target="_blank">Profil Sekolah</a>
-        <!-- Menuju ke halaman daftar kursus -->
         <a href="/courses">Katalog Kursus</a>
-        <!-- Link menuju informasi SPMB -->
         <a href="https://spmb.sekolahbppi.sch.id/" target="_blank">Informasi SPMB</a>
       </div>
     </div>
 
-    <!-- Hero Banner -->
     <div class="bppi-hero-wrapper">
       <div class="bppi-hero">
         <div class="bppi-hero-text">
@@ -367,13 +363,10 @@
       </div>
     </div>
 
-    <!-- Main Content Area -->
     <div class="bppi-main-wrapper">
       
-      <!-- Konten Utama Kiri -->
       <div class="bppi-content">
         
-        <!-- Card Pengumuman -->
         <div class="bppi-card">
           <div class="bppi-card-header">
             <h2 class="bppi-card-title">Pengumuman Terbaru</h2>
@@ -383,14 +376,12 @@
           </p>
         </div>
 
-        <!-- Card Kategori -->
         <div class="bppi-card">
           <div class="bppi-card-header">
             <h2 class="bppi-card-title">Kategori Kelas</h2>
-            <a href="/courses" style="font-size: 13px; color: var(--primary); text-decoration: none; font-weight: 500;">Lihat Semua</a>
+            <a href="/courses" style="font-size: 13px; color: var(--primary) !important; text-decoration: none !important; font-weight: 500;">Lihat Semua</a>
           </div>
 
-          <!-- Accordion Modern -->
           <details class="bppi-accordion" open>
             <summary>Semester Genap 2025/2026</summary>
             <div class="bppi-accordion-content">
@@ -421,10 +412,8 @@
 
       </div>
 
-      <!-- Sidebar Kanan -->
       <div class="bppi-sidebar">
         
-        <!-- Card User Online -->
         <div class="bppi-card">
           <div class="bppi-card-header">
             <h2 class="bppi-card-title">Aktivitas Jaringan</h2>
@@ -436,7 +425,6 @@
           <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; margin-left: 24px;">Dalam 5 menit terakhir</p>
         </div>
 
-        <!-- Card Kalender -->
         <div class="bppi-card">
           <div class="bppi-card-header">
             <h2 class="bppi-card-title">Mei 2026</h2>
@@ -480,7 +468,6 @@
 
     </div>
 
-    <!-- Footer Modern -->
     <footer class="bppi-footer">
       <div class="bppi-footer-grid">
         <div class="bppi-footer-col">
@@ -513,4 +500,4 @@
     </footer>
 
   </div>
-</div>
+</div>  
