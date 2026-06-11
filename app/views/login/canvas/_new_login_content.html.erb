@@ -8,12 +8,15 @@
 # Software Foundation, version 3 of the License.
 #
 # Canvas is distributed in the hope that it will be useful, but WITHOUT ANY
-# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-# A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.
+# See the GNU Affero General Public License for more
 # details.
 #
 # You should have received a copy of the GNU Affero General Public License along
-# with this program. If not, see <http://www.gnu.org/licenses/>.
+# with this program.
+# If not, see <http://www.gnu.org/licenses/>.
 %>
 
 <%
@@ -32,15 +35,113 @@
   end
 %>
 
+<style>
+  /* Styling khusus untuk Logo Kolaborasi di atas Form */
+  .bppi-collab-logo {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    margin-bottom: 24px !important;
+    width: 100% !important;
+  }
+  
+  .bppi-collab-logo > img {
+    height: 48px !important; /* Ukuran logo BPPI */
+    width: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+  
+  .bppi-collab-x {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: #94a3b8 !important;
+    display: block !important;
+  }
+
+  /* Penyesuaian paksa logo bawaan Canvas agar sejajar */
+  .canvas-original-logo {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  
+  .canvas-original-logo * {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .canvas-original-logo svg,
+  .canvas-original-logo img {
+    height: 32px !important; /* Memperkecil logo canvas agar seimbang */
+    width: auto !important;
+    max-width: 150px !important;
+    display: block !important;
+  }
+
+  /* Tameng anti-biru untuk tombol Masuk ke LMS */
+  .ic-Login__landing-button {
+    color: #ffffff !important;
+  }
+</style>
+
 <div class="ic-Login<%= params[:previewing_from_themeeditor] ? ' ic-Login--previewing' : '' %>">
   <div class="ic-Login__container">
+    <section class="ic-Login__landing" aria-labelledby="bppi-login-landing-title">
+      <p class="ic-Login__landing-eyebrow">
+        <%= t("BPPI Learning Management System") %>
+      </p>
+      <h1 id="bppi-login-landing-title" class="ic-Login__landing-title">
+        <%= t("Belajar lebih terarah dalam satu ruang digital") %>
+      </h1>
+      <p class="ic-Login__landing-copy">
+        <%= t("Akses kelas, materi, tugas, nilai, dan komunikasi pembelajaran dari satu tempat yang aman dan mudah digunakan.") %>
+      </p>
+      <div class="ic-Login__landing-actions">
+        <a href="#login_form" class="Button Button--primary ic-Login__landing-button">
+          <%= t("Masuk ke LMS") %>
+        </a>
+        <% if @domain_root_account.enable_course_catalog? %>
+          <a href="/search/all_courses" class="ic-Login__landing-link">
+            <%= t("Lihat katalog kursus") %>
+          </a>
+        <% end %>
+      </div>
+      <ul class="ic-Login__landing-highlights" aria-label="<%= t("Fitur utama LMS") %>">
+        <li>
+          <strong><%= t("Materi") %></strong>
+          <span><%= t("Konten pembelajaran tertata per kelas") %></span>
+        </li>
+        <li>
+          <strong><%= t("Tugas") %></strong>
+          <span><%= t("Pengumpulan dan penilaian lebih rapi") %></span>
+        </li>
+        <li>
+          <strong><%= t("Diskusi") %></strong>
+          <span><%= t("Kolaborasi guru dan siswa") %></span>
+        </li>
+      </ul>
+    </section>
     <div class="ic-Login__content">
       <div class="ic-Login__innerContent">
 
         <div class="ic-Login-header">
-          <%= render :partial => 'login/shared/header_logo' %>
+          <div class="bppi-collab-logo">
+            <img src="/images/custom_logo/Elearning_BPPI2.png" alt="Elearning BPPI Logo">
+            <span class="bppi-collab-x">✕</span>
+            <div class="canvas-original-logo">
+              <%= render :partial => 'login/shared/header_logo' %>
+              <%= render "login/canvas/login_banner" %>
+            </div>
+          </div>
+          
           <div class="ic-Login-header__links">
-            <%= render "login/canvas/login_banner" %>
             <% if @domain_root_account.enable_course_catalog? %>
               <a href="/search/all_courses" class="ic-Login__link">
                 <%= t('browse_courses', 'Browse courses') %>
@@ -80,8 +181,7 @@
               <div class="ic-Form-control ic-Form-control--login">
                 <%= submit_tag t('log_in', 'Log In'), type: login_btn_type, class: "Button Button--login" %>
               </div>
-            </div> <!-- ic-Login__actions -->
-            <%= render partial: "sso_buttons", locals: { aacs: @aacs_with_buttons } %>
+            </div> <%= render partial: "sso_buttons", locals: { aacs: @aacs_with_buttons } %>
           <% end %>
           <%= form_for :pseudonym_session, :url => forgot_password_path, :html => {:id => "forgot_password_form", :style => "display: none;"} do |f| %>
             <h1 class="ui-helper-hidden-accessible"><%= t('Forgot Password?') %></h1>
@@ -101,12 +201,9 @@
                 <button type="<%= forgot_password_btn_type %>" class="Button Button--login">
                   <%= t('buttons.request_password', 'Request Password') %>
                 </button>
-              </div> <!-- end ic-Login__actions -->
-            </div>
+              </div> </div>
           <% end %>
-        </div> <!-- end ic-Login__body -->
-      </div> <!-- end ic-Login__innerContent  -->
-      <footer role="contentinfo" id="footer" class="ic-Login-footer">
+        </div> </div> <footer role="contentinfo" id="footer" class="ic-Login-footer">
 
         <div id="footer-links" class="ic-Login-footer__links">
           <% if Setting.get("show_opensource_linkback", "false") == "true" %>
@@ -124,6 +221,5 @@
           <%= render :partial => 'shared/footer_epilogue' %>
         </div>
     </footer>
-    </div> <!-- end ic-Login__content -->
-  </div>
-</div> <!-- end ic-Login -->
+    </div> </div>
+</div> ```

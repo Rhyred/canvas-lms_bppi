@@ -1,0 +1,508 @@
+<%# js_bundle :home_page %>
+
+<style>
+  /* ==========================================================
+     CSS OVERRIDE CANVAS LMS
+     Memaksa container bawaan Canvas agar tidak mengganggu
+  ========================================================== */
+  body:not(.full-width-layout) #wrapper,
+  body:not(.full-width-layout) #content,
+  body:not(.full-width-layout) .ic-Layout-contentMain,
+  body:not(.full-width-layout) .ic-app-main-content,
+  #home-page-mount {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+  /* ==========================================================
+     TEMA MODERN BPPI LMS
+  ========================================================== */
+  :root {
+    --primary: #2563eb;       /* Blue 600 */
+    --primary-hover: #1d4ed8; /* Blue 700 */
+    --surface: #ffffff;
+    --background: #f1f5f9;    /* Slate 100 */
+    --text-main: #1e293b;     /* Slate 800 */
+    --text-muted: #64748b;    /* Slate 500 */
+    --border: #e2e8f0;        /* Slate 200 */
+    --radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Trik "Breakout" diaktifkan kembali agar 100% menutupi layar kiri-kanan */
+  .bppi-el-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--background);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .bppi-el-container * {
+    box-sizing: border-box;
+  }
+
+  /* --- Top Bar Gelap Elegan --- */
+  .bppi-topbar {
+    background-color: #0f172a; /* Slate 900 */
+    color: #cbd5e1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .bppi-topbar a {
+    color: #60a5fa !important; /* Blue 400 */
+    text-decoration: none !important;
+    transition: color 0.2s;
+  }
+  .bppi-topbar a:hover { color: #93c5fd !important; }
+  .bppi-topbar-left { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* --- Header Bersih (Navigasi Kanan) --- */
+  .bppi-header {
+    background-color: var(--surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 5%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  
+  .bppi-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  /* PERBAIKAN LOGO */
+  .bppi-logo-img {
+    height: 48px;
+    width: auto;
+    max-width: 300px;
+    object-fit: contain;
+  }
+  
+  .bppi-nav { 
+    display: flex;
+    gap: 32px; 
+    flex-wrap: wrap; 
+    align-items: center; 
+  }
+  .bppi-nav a {
+    color: var(--text-muted) !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.2s;
+    padding-right: 0 !important;
+    background-image: none !important;
+  }
+  .bppi-nav a:hover, .bppi-nav a.active { color: var(--primary) !important; }
+
+  .bppi-nav a .ui-icon-extlink,
+  .bppi-nav a .icon-external-link,
+  .bppi-nav a span[class*="icon-"],
+  .bppi-nav a i,
+  .bppi-nav a svg {
+    display: none !important;
+  }
+  .bppi-nav a::after,
+  .bppi-nav a::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* --- Hero Banner --- */
+  .bppi-hero-wrapper { padding: 24px 5% 0; }
+  .bppi-hero {
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+    height: 380px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    box-shadow: var(--shadow);
+  }
+  .bppi-hero-text {
+    max-width: 600px;
+    color: white;
+  }
+  .bppi-hero-text h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+    color: white !important;
+  }
+  .bppi-hero-text p {
+    font-size: 1.1rem;
+    color: #e2e8f0 !important;
+    margin: 0 0 24px 0;
+  }
+  
+  .bppi-btn {
+    background-color: var(--primary) !important;
+    color: white !important; /* Tameng agar teks tetap putih */
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    font-weight: 600;
+    display: inline-block;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .bppi-btn:hover { 
+    background-color: var(--primary-hover) !important; 
+    color: white !important;
+  }
+
+  /* --- Layout Utama --- */
+  .bppi-main-wrapper {
+    display: flex;
+    gap: 32px;
+    padding: 32px 5%;
+    max-width: 100%;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* --- Komponen Card --- */
+  .bppi-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .bppi-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--background);
+    padding-bottom: 12px;
+  }
+  .bppi-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  /* --- Accordion Kategori --- */
+  .bppi-accordion {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+  .bppi-accordion:hover { border-color: #cbd5e1; }
+  .bppi-accordion summary {
+    padding: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: var(--surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+  .bppi-accordion summary::-webkit-details-marker { display: none; }
+  .bppi-accordion summary::after {
+    content: "+";
+    font-size: 18px;
+    color: var(--primary);
+    font-weight: 400;
+  }
+  .bppi-accordion[open] summary::after { content: "−"; }
+  .bppi-accordion[open] summary { border-bottom: 1px solid var(--border); background-color: #f8fafc; }
+  .bppi-accordion-content { padding: 16px; font-size: 14px; color: var(--text-muted); }
+
+  /* --- Search Bar Modern --- */
+  .bppi-search-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .bppi-search-bar input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .bppi-search-bar input:focus { border-color: var(--primary); }
+
+  /* --- Sidebar Kanan --- */
+  .bppi-sidebar { flex: 1; min-width: 320px; max-width: 450px; }
+  .bppi-content { flex: 3; }
+
+  /* --- Kalender Modern --- */
+  .bppi-calendar { width: 100%; text-align: center; border-collapse: separate; border-spacing: 0 8px; }
+  .bppi-calendar th { font-weight: 600; color: var(--text-muted); font-size: 12px; text-transform: uppercase; padding-bottom: 8px; }
+  .bppi-calendar td { padding: 8px 4px; font-size: 14px; color: var(--text-main); }
+  .bppi-cal-active {
+    background-color: #e0f2fe; /* Light Blue */
+    color: #0369a1;
+    border-radius: 50%;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bppi-cal-today {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+  }
+
+  /* --- Footer --- */
+  .bppi-footer {
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 48px 5% 24px;
+    margin-top: 40px;
+  }
+  .bppi-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .bppi-footer-col h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--text-main); }
+  .bppi-footer-col p, .bppi-footer-col a { color: var(--text-muted); font-size: 14px; text-decoration: none; line-height: 1.8; }
+  .bppi-footer-col a:hover { color: var(--primary); }
+  .bppi-footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* RESPONSIVE */
+  @media screen and (max-width: 1024px) {
+    .bppi-main-wrapper { flex-direction: column; }
+    .bppi-sidebar { width: 100%; max-width: none; }
+    .bppi-hero-text h1 { font-size: 2rem; }
+    .bppi-hero { height: 300px; text-align: center; justify-content: center; }
+  }
+  @media screen and (max-width: 768px) {
+    .bppi-header { flex-direction: column; gap: 16px; padding-bottom: 16px; }
+    .bppi-nav { justify-content: center; }
+    .bppi-topbar { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+
+<div id="home-page-mount">
+  <div class="bppi-el-container">
+    
+    <div class="bppi-topbar">
+      <div class="bppi-topbar-left">
+        <span>📞 +62 21 1234567 ext 123</span>
+        <span>✉ lms@bppi.ac.id</span>
+      </div>
+      <div>
+        Anda belum login. <a href="/login/canvas">Masuk ke Sistem &rarr;</a>
+      </div>
+    </div>
+
+    <div class="bppi-header">
+      <a href="/" class="bppi-logo">
+        <img src="/images/custom_logo/Elearning_BPPI.png" alt="Elearning BPPI Logo" class="bppi-logo-img">
+      </a>
+      <div class="bppi-nav">
+        <a href="/" class="active">Beranda</a>
+        <a href="https://sekolahbppi.sch.id/" target="_blank">Profil Sekolah</a>
+        <a href="/courses">Katalog Kursus</a>
+        <a href="https://spmb.sekolahbppi.sch.id/" target="_blank">Informasi SPMB</a>
+      </div>
+    </div>
+
+    <div class="bppi-hero-wrapper">
+      <div class="bppi-hero">
+        <div class="bppi-hero-text">
+          <h1>Selamat Datang di Ruang Belajar Digital</h1>
+          <p>Akses materi pelajaran, tugas, dan diskusi interaktif dari mana saja. Tingkatkan pengalaman belajarmu bersama BPPI LMS.</p>
+          <a href="/login/canvas" class="bppi-btn">Mulai Belajar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bppi-main-wrapper">
+      
+      <div class="bppi-content">
+        
+        <div class="bppi-card">
+          <div class="bppi-card-header">
+            <h2 class="bppi-card-title">Pengumuman Terbaru</h2>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; text-align: center; padding: 20px 0; background: #f8fafc; border-radius: 8px; border: 1px dashed var(--border);">
+            Belum ada pengumuman baru untuk saat ini.
+          </p>
+        </div>
+
+        <div class="bppi-card">
+          <div class="bppi-card-header">
+            <h2 class="bppi-card-title">Kategori Mata Pelajaran</h2>
+            <a href="/courses" style="font-size: 13px; color: var(--primary) !important; text-decoration: none !important; font-weight: 500;">Lihat Semua</a>
+          </div>
+
+          <details class="bppi-accordion" open>
+            <summary>Muatan Nasional &amp; Kewilayahan (Umum)</summary>
+            <div class="bppi-accordion-content">
+              Daftar mata pelajaran wajib untuk seluruh tingkat kelas (X, XI, XII) seperti Pendidikan Agama, Pancasila, Bahasa Indonesia, Matematika, Sejarah, dan Penjasorkes.
+            </div>
+          </details>
+
+          <details class="bppi-accordion">
+            <summary>Rekayasa Perangkat Lunak (RPL)</summary>
+            <div class="bppi-accordion-content">
+              Ruang kelas digital khusus untuk kompetensi keahlian Rekayasa Perangkat Lunak. Mencakup Dasar Pemrograman, Basis Data, Pemrograman Web dan Perangkat Bergerak, serta PBO.
+            </div>
+          </details>
+
+          <details class="bppi-accordion">
+            <summary>Teknik Komputer dan Jaringan (TKJ)</summary>
+            <div class="bppi-accordion-content">
+              Ruang kelas digital khusus untuk kompetensi keahlian Teknik Komputer dan Jaringan. Mencakup Administrasi Infrastruktur Jaringan (AIJ), Teknologi Layanan Jaringan (TLJ), dan Administrasi Sistem Jaringan.
+            </div>
+          </details>
+
+          <details class="bppi-accordion">
+            <summary>Produk Kreatif dan Kewirausahaan (PKK)</summary>
+            <div class="bppi-accordion-content">
+              Mata pelajaran kelompok produk kreatif untuk melatih jiwa bisnis siswa SMK dalam membuat produk nyata, manajemen usaha, dan strategi pemasaran digital.
+            </div>
+          </details>
+          
+          <div class="bppi-search-bar">
+            <input type="text" placeholder="Cari nama mata pelajaran atau guru..." />
+            <button class="bppi-btn">Cari</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="bppi-sidebar">
+        
+        <div class="bppi-card">
+          <div class="bppi-card-header">
+            <h2 class="bppi-card-title">Aktivitas Jaringan</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 12px; height: 12px; background: #10b981; border-radius: 50%; box-shadow: 0 0 0 4px #d1fae5;"></div>
+            <span style="font-size: 14px; font-weight: 600; color: var(--text-main);">45 Pengguna Aktif</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; margin-left: 24px;">Dalam 5 menit terakhir</p>
+        </div>
+
+        <div class="bppi-card">
+          <div class="bppi-card-header">
+            <h2 class="bppi-card-title">Mei 2026</h2>
+          </div>
+          <table class="bppi-calendar">
+            <thead>
+              <tr>
+                <th>Sn</th><th>Sl</th><th>Rb</th><th>Km</th><th>Jm</th><th>Sb</th><th>Mg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td><td></td><td></td><td></td>
+                <td><span class="bppi-cal-active">1</span></td><td>2</td><td>3</td>
+              </tr>
+              <tr>
+                <td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+              </tr>
+              <tr>
+                <td>11</td><td>12</td><td>13</td>
+                <td><span class="bppi-cal-active">14</span></td>
+                <td><span class="bppi-cal-active">15</span></td>
+                <td>16</td><td>17</td>
+              </tr>
+              <tr>
+                <td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td>
+              </tr>
+              <tr>
+                <td>25</td>
+                <td><span class="bppi-cal-today">26</span></td>
+                <td><span class="bppi-cal-active">27</span></td>
+                <td><span class="bppi-cal-active">28</span></td>
+                <td>29</td><td>30</td>
+                <td><span class="bppi-cal-active">31</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <footer class="bppi-footer">
+      <div class="bppi-footer-grid">
+        <div class="bppi-footer-col">
+          <a href="/" class="bppi-logo" style="margin-bottom: 16px;">
+            <img src="/images/custom_logo/Elearning_BPPI.png" alt="Elearning BPPI Logo" class="bppi-logo-img">
+          </a>
+          <p>Platform E-Learning resmi yang dirancang untuk mendukung ekosistem pendidikan digital secara komprehensif, cepat, dan mudah digunakan.</p>
+        </div>
+        <div class="bppi-footer-col">
+          <h3>Tautan Penting</h3>
+          <p><a href="https://spmb.sekolahbppi.sch.id/" target="_blank">Informasi SPMB</a></p>
+          <p><a href="/help">Bantuan & Dukungan</a></p>
+          <p><a href="/peraturan">Peraturan Akademik</a></p>
+        </div>
+        <div class="bppi-footer-col">
+          <h3>Hubungi Kami</h3>
+          <p>Gedung Utama SMK BPPI, Jl. Pendidikan No. 123</p>
+          <p>Kota Bandung, Indonesia</p>
+          <p>📞 +62 21 1234567</p>
+          <p>✉ lms@bppi.ac.id</p>
+        </div>
+      </div>
+      <div class="bppi-footer-bottom">
+        <div>&copy; 2026 BPPI Learning Management System. All rights reserved.</div>
+        <div style="display: flex; gap: 16px;">
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Kebijakan Privasi</a>
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Ketentuan Layanan</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div>

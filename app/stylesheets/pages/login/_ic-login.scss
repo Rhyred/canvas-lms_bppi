@@ -70,11 +70,104 @@ body.ic-Login-Body { // apply the background to the body element so that you don
   color: $ic-color-light;
 }
 .ic-Login__container {
-  margin-top: $ic-sp*2;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  gap: $ic-sp*3;
+  justify-content: center;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: $ic-sp*2;
+  width: 100%;
+}
+.ic-Login__landing {
+  box-sizing: border-box;
+  max-width: 600px;
+  padding: $ic-sp*2 0;
+  text-shadow: 0 1px 2px rgba(black, 0.4);
+}
+.ic-Login__landing-eyebrow {
+  color: rgba($ic-color-light, 0.86);
+  font-size: 0.875rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  margin: 0 0 $ic-sp;
+  text-transform: uppercase;
+}
+.ic-Login__landing-title {
+  color: $ic-color-light;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.08;
+  margin: 0 0 $ic-sp;
+}
+.ic-Login__landing-copy {
+  color: rgba($ic-color-light, 0.92);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 520px;
+}
+.ic-Login__landing-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $ic-sp;
+  margin-top: $ic-sp*1.5;
+}
+.ic-Login__landing-button {
+  box-shadow: 0 10px 28px rgba(black, 0.24);
+}
+.ic-Login__landing-link {
+  color: $ic-color-light;
+  font-weight: bold;
+  text-decoration: underline;
+
+  &:hover,
+  &:focus {
+    color: $ic-color-light;
+    text-decoration: none;
+  }
+}
+.ic-Login__landing-highlights {
+  display: grid;
+  gap: $ic-sp;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: $ic-sp*2 0 0;
+  padding: 0;
+
+  li {
+    background: rgba(black, 0.28);
+    border: 1px solid rgba($ic-color-light, 0.24);
+    border-radius: $ic-Login-border-radius;
+    box-sizing: border-box;
+    min-width: 0;
+    padding: $ic-sp;
+  }
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    color: $ic-color-light;
+    font-size: 1rem;
+    margin-bottom: $ic-sp*0.25;
+  }
+
+  span {
+    color: rgba($ic-color-light, 0.86);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
 }
 .ic-Login__content {
+  flex: 0 0 400px;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0;
   background: var(--ic-brand-Login-Content-bgd-color);
   border: 5px solid var(--ic-brand-Login-Content-border-color);
   padding: $ic-sp;
@@ -410,4 +503,52 @@ body.body--login-confirmation {
   height: auto;
   vertical-align: middle;
   margin-#{direction(right)}: $ic-sp;
+}
+
+@media (max-width: 900px) {
+  .ic-Login__container {
+    align-items: stretch;
+    flex-direction: column;
+    gap: $ic-sp*1.5;
+    justify-content: flex-start;
+    min-height: auto;
+  }
+
+  .ic-Login__landing {
+    max-width: 640px;
+    padding: 0;
+  }
+
+  .ic-Login__landing-title {
+    font-size: 2.25rem;
+  }
+
+  .ic-Login__content {
+    flex: 0 1 auto;
+    max-width: 640px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  body.ic-Login-Body {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .ic-Login__container {
+    padding: $ic-sp;
+  }
+
+  .ic-Login__landing-title {
+    font-size: 1.875rem;
+  }
+
+  .ic-Login__landing-copy {
+    font-size: 1rem;
+  }
+
+  .ic-Login__landing-highlights {
+    grid-template-columns: 1fr;
+  }
 }

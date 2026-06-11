@@ -139,7 +139,6 @@ iframe.tool_launch {
   }
 }
 
-
 .lti_tool_icon {
   margin-right: 0.25rem;
   max-width: 1.2rem;
@@ -179,11 +178,130 @@ iframe.tool_launch {
   }
 }
 
-@include mobile-only {
+@media screen and (max-width: 1024px) {
   #left-side, #header, .ic-app-nav-toggle-and-crumbs{
     display: none !important;
   }
   .bcs__trigger{ display: none !important; }
 }
 
+// ==========================================================
+// OVERRIDE TEMA BPPI LMS (PAKSAAN WARNA)
+// ==========================================================
 
+// 1. Global Navigation (Menu Kiri)
+.ic-app-header {
+  background-color: #0f172a !important; // Navy Gelap
+}
+
+// Warna Logo Background di Kiri Atas
+.ic-app-header__logomark-container {
+  background-color: #0f172a !important;
+}
+
+// Warna Ikon Menu saat Aktif
+.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-icon-svg {
+  fill: #2563eb !important; // Biru BPPI
+}
+.ic-app-header__menu-list-link--active {
+  color: #2563eb !important;
+}
+
+// 2. Warna Teks/Link Utama & Tombol
+a {
+  color: #2563eb !important;
+}
+.Button--primary {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+.Button--primary:hover {
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+// 3. Kotak Peringatan Dashboard ("Welcome to Canvas!")
+// Menggunakan multi-selektor untuk memastikan semua jenis notifikasi tertangkap
+.ic-notification-container .ic-Notification,
+div.ic-Notification,
+.ic-notification,
+.ic-Dashboard-Notification,
+.ic-notification-content {
+  border-left: 4px solid #2563eb !important; // Garis kiri tebal biru BPPI
+  border-radius: 8px !important; // Sudut membulat
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important; // Bayangan halus
+  border-top: 1px solid #f1f5f9 !important;
+  border-right: 1px solid #f1f5f9 !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  margin-bottom: 1.5rem !important; // Jarak antar kotak dilebarkan sedikit
+  background-color: #ffffff !important;
+}
+
+// Modifikasi ikon agar lebih menonjol
+.ic-notification-container .ic-Notification__icon,
+div.ic-Notification__icon,
+.ic-notification__icon,
+i.ic-icon-info {
+  color: #2563eb !important;
+  background-color: #e0f2fe !important; // Biru sangat muda
+  border-radius: 50% !important;
+  padding: 8px !important;
+  margin-top: 4px !important;
+}
+
+// 4. Sembunyikan Logo Instructure di Kiri Bawah (Opsional)
+.ic-app-footer {
+  display: none !important;
+}
+
+// ==========================================================
+// 5. POLESAN MODERN (ACCOUNT TRAY & SIDEBAR) SUPER AGRESIF
+// ==========================================================
+
+/* Efek melayang (Shadow) untuk Panel Kiri (Tray) */
+body .navigation-tray-container,
+body .tray-with-space-for-global-nav {
+  box-shadow: 8px 0 25px rgba(0, 0, 0, 0.15) !important;
+  border-right: none !important;
+}
+
+/* Efek hover untuk menu di dalam Tray (Notifications, Files, dll) */
+body .navigation-tray-container a,
+body .tray-with-space-for-global-nav a {
+  transition: all 0.2s ease-in-out !important;
+  border-radius: 6px !important;
+}
+body .navigation-tray-container a:hover,
+body .tray-with-space-for-global-nav a:hover {
+  background-color: #f1f5f9 !important;
+  padding-left: 12px !important; /* Geser dikit pas disorot biar interaktif */
+}
+
+/* Tombol Logout dibikin lebih membulat dan interaktif */
+.navigation-tray-container form[action="/logout"] button,
+.tray-with-space-for-global-nav form[action="/logout"] button {
+  border-radius: 8px !important;
+  border: 1px solid #cbd5e1 !important;
+  transition: all 0.2s !important;
+}
+.navigation-tray-container form[action="/logout"] button:hover,
+.tray-with-space-for-global-nav form[action="/logout"] button:hover {
+  background-color: #fee2e2 !important;
+  color: #ef4444 !important;
+  border-color: #ef4444 !important;
+}
+
+/* Tombol Sidebar Kanan membulat */
+#right-side .Button,
+#right-side .btn {
+  border-radius: 8px !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+  transition: all 0.2s !important;
+}
+#right-side .Button:hover,
+#right-side .btn:hover {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
